@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task9p
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mansheen-task9p
+  template:
+    metadata:
+      labels:
+        app: mansheen-task9p
+    spec:
+      containers:
+      - name: mansheen-task9p
+        image: mansheenk/task9p:latest
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: my-creds
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-creds
+              key: password
